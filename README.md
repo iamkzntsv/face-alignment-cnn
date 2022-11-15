@@ -44,10 +44,6 @@ From Table \ref{table_1} we can see that CNN training loss is higher than the va
 
 ![My Image](figures/table.png)
 
-Another way to evaluate the performance is to plot the cumulative density of an error. In this case, the error was calculated as the average Euclidean distance between the set of predicted landmarks and the ground truth. Cumulative density allows to see what proportion of predictions have an error less than \textit{some\underline{ }value}. For instance, Fig. \ref{cum_dense} indicates that almost 100\% of inc\underline{ }tr predictions have an error of less than 2, while for cnn most predictions have an error between 2 and 4.
-
-![My Image](figures/cum_dense.png)
-
 If we display the results of the prediction, we can see that, in general, the inc\underline{ }tr model gives more plausible landmark locations.
 
 ![My Image](figures/conv_pretrained_samples.png)
