@@ -20,7 +20,7 @@ For our experiments, 3 different architectures were used to evaluate which desig
 
 One way to get better predictions from our model is to stop the learning process if there is no significant increase in accuracy. We can assume that if accuracy does not improve within 10 epochs, this is the best performance we can get and we can stop training.
 
-First approach implies building a basic convolutional network model. Several techniques are used to address overfitting. Batch normalization is applied to normalize the output for each layer, and dropout with a probability of 0.2 is added to the last convolutional and hidden layer, since these layers have the most trainable parameters and are therefore more likely to cause overfitting.
+First approach implies building a basic convolutional network model. Several techniques are used to address overfitting. Batch normalization is applied to normalize the output for each convolutional layer, and dropout with a probability of 0.2 is added to the last convolutional and hidden layer, since these layers have the most trainable parameters and are therefore more likely to cause overfitting.
 
 ![My Image](figures/cnn_arch.png)
 
@@ -28,7 +28,7 @@ One of the main drawbacks of using deep networks is that as the network grows, t
 
 ![My Image](figures/inc1.png)
 
-Nevertheless, there is a problem with the naive form because even a small number of 5x5 convolutions can be fairly expensive. Authors suggest an improved architecture by applying dimension reductions before the expensive convolutions
+Nevertheless, there is a problem with the naive form because even a small number of 5x5 convolutions can be fairly expensive. Authors suggest an improved architecture by applying dimension reductions with £1 /times 1£ kernels before the expensive convolutions.
 
 ![My Image](figures/inc2.png)
 
@@ -36,15 +36,15 @@ Although the Inception model was originally trained on the classification task, 
 
 ## Experimental Results
 
-To evaluate our models, let's compare their performance on validation data. We can see that as the number of epochs increases, the validation accuracy increases and the loss decreases accordingly for all three models. It can be seen that Inception model with trainable weights achieves the highest accuracy ($acc_{inc\text{\underline{ }}tr} \approx 0.92$) and the lowest loss ($loss_{inc\text{\underline{ }}tr} \approx 1.25$).
+To evaluate our models, we compare their performance on validation data. We can see that as the number of epochs increases, the validation accuracy increases and the loss decreases accordingly for all three models. It can be seen that Inception model with trainable weights achieves the highest accuracy $acc_{inc\text{\underline{ }}tr} \approx 0.92$ and the lowest loss $loss_{inc\text{\underline{ }}tr} \approx 1.25$.
 
 ![My Image](figures/conv_vs_pretrained.png)
 
-From Table \ref{table_1} we can see that CNN training loss is higher than the validation loss. This ambiguous behavior can be caused by dropout, which affects training loss only. We can also see that the Inception model with trained weights performs the best overall but still suffers from overfitting. One solution to this is to apply regularization to the hidden layer, which can improve performance but slow down convergence [^4].
+From the table below we can see that CNN training loss is higher than the validation loss. This ambiguous behavior can be caused by dropout, which affects training loss only. We can also see that the Inception model with trained weights performs the best overall but still suffers from overfitting. One solution to this is to apply regularization to the hidden layer, which can improve performance but slow down convergence [^4].
 
 ![My Image](figures/table.png)
 
-If we display the results of the prediction, we can see that, in general, the inc\underline{ }tr model gives more plausible landmark locations.
+If we display the results of the prediction, we can see that, in general, the inc_tr model gives more plausible landmark locations.
 
 ![My Image](figures/conv_pretrained_samples.png)
 
@@ -65,7 +65,7 @@ Failure occurs when the predicted landmarks do not match the lip shape, for inst
 
 ![My Image](figures/lip_colour_faulty.png)
 
-Changing the color of the eyes is a little trickier since we can't define a polygon around the iris the way we did with the lips. One possible approach is shown in Fig. \ref{eye_alg}.
+Changing the color of the eyes is a little trickier since we can't define a polygon around the iris the way we did with the lips.
 
 ![My Image](figures/eye_diagram.png)
 ![My Image](figures/eye_colour_successful.png)
