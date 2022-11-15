@@ -24,6 +24,9 @@ One way to get better predictions from our model is to stop the learning process
 
 First approach implies building a basic convolutional network model. Several techniques are used to address overfitting. Batch normalization is applied to normalize the output for each convolutional layer, and dropout with a probability of 0.2 is added to the last convolutional and hidden layer, since these layers have the most trainable parameters and are therefore more likely to cause overfitting.
 
+| ![space-1.jpg](figures/cnn_arch.png) | 
+|:--:| 
+| *Space* |
 ![My Image](figures/cnn_arch.png)
 
 One of the main drawbacks of using deep networks is that as the network grows, the number of parameters increases accordingly, making it more prone to overfitting. One way to deal with this is to use filters with different sized kernels at the same level as one module and expand the network in width rather than in depth. This is the general idea behind the Inception network - to stack such modules upon each other with occasional max-pooling layers [^3].
