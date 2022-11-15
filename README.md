@@ -18,7 +18,7 @@ Before passing our data to the neural network, we need to consider a few techniq
 
 For our experiments, 3 different architectures were used to evaluate which design solutions are more suitable for a given problem. The first approach uses a simple CNN and the other two are based on a pre-trained Inception Model with two dense layers added at the end. We also need to choose an appropriate loss function for our model. The default choice for most regression problems is MSE, which is defined as follows:
 
-$$MSE=\frac{1}{N}(y^(i)-\hat{y}^(i))^2$$
+$$MSE=\frac{1}{N}(y^{(i)}-\hat{y}^{(i)})^2$$
 
 One way to get better predictions from our model is to stop the learning process if there is no significant increase in accuracy. We can assume that if accuracy does not improve within 10 epochs, this is the best performance we can get and we can stop training.
 
