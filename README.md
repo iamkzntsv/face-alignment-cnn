@@ -18,6 +18,8 @@ Before passing our data to the neural network, we need to consider a few techniq
 
 For our experiments, 3 different architectures were used to evaluate which design solutions are more suitable for a given problem. The first approach uses a simple CNN and the other two are based on a pre-trained Inception Model with two dense layers added at the end. We also need to choose an appropriate loss function for our model. The default choice for most regression problems is MSE, which is defined as follows:
 
+$$MSE=\frac{1}{N}(y^{(i)}-\hat{y}^{(i)})^2$$
+
 One way to get better predictions from our model is to stop the learning process if there is no significant increase in accuracy. We can assume that if accuracy does not improve within 10 epochs, this is the best performance we can get and we can stop training.
 
 First approach implies building a basic convolutional network model. Several techniques are used to address overfitting. Batch normalization is applied to normalize the output for each convolutional layer, and dropout with a probability of 0.2 is added to the last convolutional and hidden layer, since these layers have the most trainable parameters and are therefore more likely to cause overfitting.
@@ -36,7 +38,7 @@ Although the Inception model was originally trained on the classification task, 
 
 ## Experimental Results
 
-To evaluate our models, we compare their performance on validation data. We can see that as the number of epochs increases, the validation accuracy increases and the loss decreases accordingly for all three models. It can be seen that Inception model with trainable weights achieves the highest accuracy $acc_{inc\text{\underline{ }}tr} \approx 0.92$ and the lowest loss $loss_{inc\text{\underline{ }}tr} \approx 1.25$.
+To evaluate our models, we compare their performance on validation data. We can see that as the number of epochs increases, the validation accuracy increases and the loss decreases accordingly for all three models. It can be seen that Inception model with trainable weights achieves the highest accuracy and the lowest loss.
 
 ![My Image](figures/conv_vs_pretrained.png)
 
