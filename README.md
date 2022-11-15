@@ -8,6 +8,8 @@ Facial landmark detection acts as a fundamental part of many computer vision app
 
 The amount of data in the original dataset may not be enough for proper model generalization. To overcome this problem several data augmentation techniques have been implemented. First, each image is reflected horizontally along with the corresponding landmarks. Random rotations and noise are then applied, and finally brightness shifts and vignette are added. As a result, we get a dataset of 16866 images, which we can now use to train the model.
 
+![alt text](https://github.com/iamkzntsv/face-alignment-cnn/blob/main/figures/data_augmentation.png)
+
 ### Pre-processing
 
 Before passing our data to the neural network, we need to consider a few techniques to make it more consistent. Since optimizers are sensitive to the feature scale, we need to normalize pixel values so that they end up in the range $0$ to $1$, which can be done by dividing the value of each pixel by $255$. Also, we don't need our images to have a high resolution and we can compress them to a lower one $(96 \times 96)$ to speed up training.
