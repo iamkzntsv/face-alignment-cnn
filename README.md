@@ -36,8 +36,7 @@ However, there is a problem with the naive form because even a small number of 5
 
 | ![inc2.png](figures/inc2.png) | 
 |:--:| 
-| Inception module with dimension reduction. Adapted from Going deeper with convolutions, Szegedy et al.,
-2015. |
+| Inception module with dimension reduction. Adapted from Going deeper with convolutions, Szegedy et al., 2015. |
 
 Although the Inception model was originally trained on the classification task, we can use it to extract features from image data and then feed them as input to another model [^4]. In this case, we use one hidden layer and an output layer, and we get input from the second mixed layer of the base model. The reason for this is that the first few blocks are more likely to extract high level features [^5]. Typically, when transfer learning is applied, the layers of the original model are frozen so that the weights do not change during training. However, since our data may follow a different distribution than the one original model was trained on, we can leave the weights trainable and not freeze the layers as an alternative. We can then compare the results from both approaches and decide which one is best for our task.
 
