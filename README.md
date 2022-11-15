@@ -1,14 +1,14 @@
 # Face Alignment using Convolutional Neural Network
 
 Facial landmark detection acts as a fundamental part of many computer vision applications. It is commonly used for tasks such as facial expression analysis and real-time face tracking, so it needs to be as accurate and fast as possible. Common approaches[^1][^2] suggest training a cascade of regression trees using gradient boosting algorithm and pixel intensity differences as features. Alternatively, this problem can be approached using neural networks, which is the focus of this project. In addition, we will discuss how the detected landmarks can be used for lip and eye colour modification.
-
+****
 ## Methods
 
 ### Data Augmentation
 
 The amount of data in the original dataset may not be enough for proper model generalization. To overcome this problem several data augmentation techniques have been implemented. First, each image is reflected horizontally along with the corresponding landmarks. Random rotations and noise are then applied, and finally brightness shifts and vignette are added. As a result, we get a dataset of 16866 images, which we can now use to train the model.
 
-<img src="[https://your-image-url.type](https://github.com/iamkzntsv/face-alignment-cnn/blob/main/figures/data_augmentation.png )" width="600">
+![My Image](figures/data_augmentation.png)
 
 ### Pre-processing
 
@@ -22,34 +22,61 @@ One way to get better predictions from our model is to stop the learning process
 
 First approach implies building a basic convolutional network model. Several techniques are used to address overfitting. Batch normalization is applied to normalize the output for each layer, and dropout with a probability of 0.2 is added to the last convolutional and hidden layer, since these layers have the most trainable parameters and are therefore more likely to cause overfitting.
 
+![My Image](figures/cnn_arch.pdf)
+
 One of the main drawbacks of using deep networks is that as the network grows, the number of parameters increases accordingly, making it more prone to overfitting. One way to deal with this is to use filters with different sized kernels at the same level as one module and expand the network in width rather than in depth. This is the general idea behind the Inception network - to stack such modules upon each other with occasional max-pooling layers [^3].
 
+![My Image](figures/inc1.png)
+
 Nevertheless, there is a problem with the naive form because even a small number of 5x5 convolutions can be fairly expensive. Authors suggest an improved architecture by applying dimension reductions before the expensive convolutions
+
+![My Image](figures/inc2.png)
 
 Although the Inception model was originally trained on the classification task, we can use it to extract features from image data and then feed them as input to another model [^4]. In this case, we use one hidden layer and an output layer, and we get input from the second mixed layer of the base model. The reason for this is that the first few blocks are more likely to extract high level features [^5]. Typically, when transfer learning is applied, the layers of the original model are frozen so that the weights do not change during training. However, since our data may follow a different distribution than the one original model was trained on, we can leave the weights trainable and not freeze the layers as an alternative. We can then compare the results from both approaches and decide which one is best for our task.
 
 ## Experimental Results
 
-To evaluate our models, let's compare their performance on validation data. Fig. \ref{conv_vs_pretrained} shows that as the number of epochs increases, the validation accuracy increases and the loss decreases accordingly for all three models. It can be seen that Inception model with trainable weights achieves the highest accuracy ($acc_{inc\text{\underline{ }}tr} \approx 0.92$) and the lowest loss ($loss_{inc\text{\underline{ }}tr} \approx 1.25$).
+To evaluate our models, let's compare their performance on validation data. We can see that as the number of epochs increases, the validation accuracy increases and the loss decreases accordingly for all three models. It can be seen that Inception model with trainable weights achieves the highest accuracy ($acc_{inc\text{\underline{ }}tr} \approx 0.92$) and the lowest loss ($loss_{inc\text{\underline{ }}tr} \approx 1.25$).
 
-From Table \ref{table_1} we can see that CNN training loss is higher than the validation loss. This ambiguous behavior can be caused by dropout, which affects training loss only. We can also see that the Inception model with trained weights performs the best overall but still suffers from overfitting. One solution to this is to apply regularization to the hidden layer, which can improve performance but slow down convergence \cite{zhang2016facial}.
+![My Image](figures/conv_vs_pretrained.png)
+
+From Table \ref{table_1} we can see that CNN training loss is higher than the validation loss. This ambiguous behavior can be caused by dropout, which affects training loss only. We can also see that the Inception model with trained weights performs the best overall but still suffers from overfitting. One solution to this is to apply regularization to the hidden layer, which can improve performance but slow down convergence [^4].
+
+![My Image](figures/table.png)
 
 Another way to evaluate the performance is to plot the cumulative density of an error. In this case, the error was calculated as the average Euclidean distance between the set of predicted landmarks and the ground truth. Cumulative density allows to see what proportion of predictions have an error less than \textit{some\underline{ }value}. For instance, Fig. \ref{cum_dense} indicates that almost 100\% of inc\underline{ }tr predictions have an error of less than 2, while for cnn most predictions have an error between 2 and 4.
 
+![My Image](figures/cum_dense.png)
+
 If we display the results of the prediction, we can see that, in general, the inc\underline{ }tr model gives more plausible landmark locations.
+
+![My Image](figures/conv_pretrained_samples.png)
 
 Although the model makes fairly accurate predictions for most images, it still fails in some cases. For example, if the person on the photo is grimacing or some parts of the face are occluded. Some potential ways to solve this problem are to introduce more augmentations or collect more data if possible.
 
+![My Image](figures/pred_success.png)
+![My Image](figures/pred_fail.png)
+
 ## Lip/Eye Colour Modification
 
-A simple algorithm that can be used to change lip color is described in Fig.
+A simple algorithm that can be used to change lip color is described below.
+![My Image](figures/lip_diagram.png)
+
+These are successful examples of using this approach:
+![My Image](figures/lip_colour_successful.png)
 
 Failure occurs when the predicted landmarks do not match the lip shape, for instance when the gums are predicted to be part of the lip. Because this method always tries to find a merged polygon defined by landmarks, it also doesn't work well with some occlusions (e.g. tongue). 
 
+![My Image](figures/lip_colour_faulty.png)
+
 Changing the color of the eyes is a little trickier since we can't define a polygon around the iris the way we did with the lips. One possible approach is shown in Fig. \ref{eye_alg}.
+
+![My Image](figures/eye_diagram.png)
+![My Image](figures/eye_colour_successful.png)
 
 However, this method often produces unstable results. Unlike the lip modification presented earlier, it relies on segmented pixels rather than a shape determined by predicted landmarks. Therefore, errors are likely to occur for people with darker skin tones, and results can often be affected by eyelashes and various reflections and shadows.
 
+![My Image](figures/eye_colour_faulty.png)
 
 ## Conclusion
 We have demonstrated how the face alignment problem can be solved with a CNN and compared different network architectures. We found that the pre-trained Inception model with trainable weights performs the best, although sometimes it still makes incorrect predictions. Finally, we looked at how predicted landmarks can be used to change lip and eye color. However, the accuracy of these operations is highly dependent on the quality of the landmarks and external factors such as lighting conditions and person's face morphology.
