@@ -85,14 +85,12 @@ A simple algorithm that can be used to change lip color is described below.
 | ![lip_diagram.png](figures/lip_diagram.png) | 
 |:--:| 
 | Lip colour modification algorithm |
-![My Image](figures/lip_diagram.png)
 
 These are successful examples of using this approach:
 
 | ![lip_colour_successful.png](figures/lip_colour_successful.png) | 
 |:--:| 
 | Lip colouring successful cases |
-![My Image](figures/lip_diagram.png)
 
 Failure occurs when the predicted landmarks do not match the lip shape, for instance when the gums are predicted to be part of the lip. Because this method always tries to find a merged polygon defined by landmarks, it also doesn't work well with some occlusions (e.g. tongue). 
 
