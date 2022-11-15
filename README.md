@@ -32,12 +32,7 @@ First approach implies building a basic convolutional network model. Several tec
 
 One of the main drawbacks of using deep networks is that as the network grows, the number of parameters increases accordingly, making it more prone to overfitting. One way to deal with this is to use filters with different sized kernels at the same level as one module and expand the network in width rather than in depth. This is the general idea behind the Inception network - to stack such modules upon each other with occasional max-pooling layers [^3].
 
-| ![inc1.png](figures/inc1.png) | 
-|:--:| 
-| Inception naive module. Adapted from Going deeper with convolutions, Szegedy et al., 2015. |
-
-
-Nevertheless, there is a problem with the naive form because even a small number of 5x5 convolutions can be fairly expensive. Authors suggest an improved architecture by applying dimension reductions with £1 /times 1£ kernels before the expensive convolutions.
+However, there is a problem with the naive form because even a small number of 5x5 convolutions can be fairly expensive. Authors suggest an improved architecture by applying dimension reductions with £1 /times 1£ kernels before the expensive convolutions.
 
 | ![inc2.png](figures/inc2.png) | 
 |:--:| 
@@ -65,8 +60,6 @@ If we display the results of the prediction, we can see that, in general, the in
 | ![conv_pretrained_samples.png](figures/conv_pretrained_samples.png) | 
 |:--:| 
 | Comparison of predictions. From top to bottom: conv, inc tr, inc non tr |
-
-![My Image](figures/conv_pretrained_samples.png)
 
 Although the model makes fairly accurate predictions for most images, it still fails in some cases. For example, if the person on the photo is grimacing or some parts of the face are occluded. Some potential ways to solve this problem are to introduce more augmentations or collect more data if possible.
 
