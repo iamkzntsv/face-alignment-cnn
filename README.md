@@ -21,7 +21,7 @@ This report discussed one possible approach for predicting facial landmarks. The
 
 ## References
 
-1. Xudong Cao, Yichen Wei, Fang Wen, and Jian Sun. Face alignment by explicit shape regression. Inter-
+[^1]: Xudong Cao, Yichen Wei, Fang Wen, and Jian Sun. Face alignment by explicit shape regression. Inter-
 national journal of computer vision, 107(2):177–190, 2014.
 2. Vahid Kazemi and Josephine Sullivan. One millisecond face alignment with an ensemble of regression
 trees. In Proceedings of the IEEE conference on computer vision and pattern recognition, pages 1867–
