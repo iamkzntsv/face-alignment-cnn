@@ -8,7 +8,9 @@ Facial landmark detection acts as a fundamental part of many computer vision app
 
 The amount of data in the original dataset may not be enough for proper model generalization. To overcome this problem several data augmentation techniques have been implemented. First, each image is reflected horizontally along with the corresponding landmarks. Random rotations and noise are then applied, and finally brightness shifts and vignette are added. As a result, we get a dataset of 16866 images, which we can now use to train the model.
 
+<p align="center">
 <img width="582" alt="data_augmentation" src="https://user-images.githubusercontent.com/49316611/202437944-917d67c6-c307-42ff-b807-928e1050ecdb.png">
+</p>
 
 ### Pre-processing
 
@@ -42,9 +44,14 @@ Although the Inception model was originally trained on the classification task, 
 
 To evaluate our models, we compare their performance on validation data. We can see that as the number of epochs increases, the validation accuracy increases and the loss decreases accordingly for all three models. It can be seen that Inception model with trainable weights achieves the highest accuracy and the lowest loss.
 
-| ![conv_vs_pretrained.png](figures/conv_vs_pretrained.png) | 
+| <p align="center">
+<img width="623" alt="conv_vs_pretrained" src="https://user-images.githubusercontent.com/49316611/202438217-e32a7246-cd2a-4566-be9a-21d4e7443f38.png">
+</p> | 
 |:--:| 
 | Model performance over time|
+
+
+
 
 From the table below we can see that CNN training loss is higher than the validation loss. This ambiguous behavior can be caused by dropout, which affects training loss only. We can also see that the Inception model with trained weights performs the best overall but still suffers from overfitting. One solution to this is to apply regularization to the hidden layer, which can improve performance but slow down convergence [^4].
 
