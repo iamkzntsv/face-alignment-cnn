@@ -34,9 +34,9 @@ One of the main drawbacks of using deep networks is that as the network grows, t
 
 However, there is a problem with the naive form because even a small number of 5x5 convolutions can be fairly expensive. Authors suggest an improved architecture by applying dimension reductions with £1 /times 1£ kernels before the expensive convolutions.
 
-| ![inc2.png](figures/inc2.png) | 
-|:--:| 
-| Inception module with dimension reduction. Adapted from Going deeper with convolutions, Szegedy et al., 2015. |
+<p align="center">
+<img width="582" alt="data_augmentation" src="https://user-images.githubusercontent.com/49316611/202439035-d8c0303d-bb33-403a-a91a-4c0450e59f96.png">
+</p>
 
 Although the Inception model was originally trained on the classification task, we can use it to extract features from image data and then feed them as input to another model [^4]. In this case, we use one hidden layer and an output layer, and we get input from the second mixed layer of the base model. The reason for this is that the first few blocks are more likely to extract high level features [^5]. Typically, when transfer learning is applied, the layers of the original model are frozen so that the weights do not change during training. However, since our data may follow a different distribution than the one original model was trained on, we can leave the weights trainable and not freeze the layers as an alternative. We can then compare the results from both approaches and decide which one is best for our task.
 
@@ -75,9 +75,9 @@ Although the model makes fairly accurate predictions for most images, it still f
 
 A simple algorithm that can be used to change lip color is described below.
 
-| ![lip_diagram.png](figures/lip_diagram.png) | 
-|:--:| 
-| Lip colour modification algorithm |
+<p align="center">
+<img width="623" alt="conv_vs_pretrained" src="https://user-images.githubusercontent.com/49316611/202439327-54c7955b-9bf8-40bd-9b8c-a4ce6428d7a5.png">
+</p> 
 
 These are successful examples of using this approach:
 
@@ -93,9 +93,10 @@ Failure occurs when the predicted landmarks do not match the lip shape, for inst
 
 Changing the color of the eyes is a little trickier since we can't define a polygon around the iris the way we did with the lips.
 
-| ![eye_diagram.png](figures/eye_diagram.png) | 
-|:--:| 
-| Eye colour modification algorithm |
+<p align="center">
+<img width="623" alt="conv_vs_pretrained" src="https://user-images.githubusercontent.com/49316611/202439397-b1202ad4-65bd-46b3-96dc-31b37cacdf88.png">
+</p>
+
 
 | ![eye_colour_successful.png](figures/eye_colour_successful.png) | 
 |:--:| 
