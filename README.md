@@ -42,13 +42,6 @@ Although the Inception model was originally trained on the classification task, 
 
 ## Experimental Results
 
-To evaluate our models, we compare their performance on validation data. We can see that as the number of epochs increases, the validation accuracy increases and the loss decreases accordingly for all three models. It can be seen that Inception model with trainable weights achieves the highest accuracy and the lowest loss.
-
-<p align="center">
-<img width="623" alt="conv_vs_pretrained" src="https://user-images.githubusercontent.com/49316611/202438217-e32a7246-cd2a-4566-be9a-21d4e7443f38.png">
-</p> 
-
-
 From the table below we can see that CNN training loss is higher than the validation loss. This ambiguous behavior can be caused by dropout, which affects training loss only. We can also see that the Inception model with trained weights performs the best overall but still suffers from overfitting. One solution to this is to apply regularization to the hidden layer, which can improve performance but slow down convergence [^4].
 
 <p align="center">
